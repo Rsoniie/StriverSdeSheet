@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+void setZeros(vector<vector<int>> &vv)
+{
+    int n = vv.size();
+    int m = vv[0].size();
+	 unordered_map<int, int> ii;
+    unordered_map<int, int> jj;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(vv[i][j] == 0)
+            {
+                ii[i]++;
+                jj[j]++;
+            }
+        }
+    }
+
+
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(ii[i] != 0 || jj[j] != 0)
+            {
+                vv[i][j] = 0;
+            }
+        }
+    }
+
+}
