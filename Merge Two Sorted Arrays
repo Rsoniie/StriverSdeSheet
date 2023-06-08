@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+
+vector<int> ninjaAndSortedArrays(vector<int>& arr, vector<int>& arr2, int m, int n) {
+     vector<int> v;
+	 for(int i=0;i<m;i++)
+	 {
+		 if(arr[i] != 0)
+		 {
+			 v.push_back(arr[i]);
+		 }
+	 }
+
+	 v.insert(v.end(), arr2.begin(), arr2.end());
+	 sort(v.begin(), v.end());
+
+	 return v;
+}
