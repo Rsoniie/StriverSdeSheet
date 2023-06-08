@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+vector<vector<long long int>> printPascal(int n) 
+{
+  vector<vector<long long int>> vv;
+  long long int arr[n][n];
+  vector<long long int> v;
+  for(int i=0;i<n;i++)
+  {
+    for(int j=0;j<=i;j++)
+    {
+
+      if(i == j || j == 0)
+      {
+         arr[i][j] = 1;
+      }
+
+      else 
+      {
+        arr[i][j] = arr[i-1][j-1]+arr[i-1][j];
+      }
+
+      //cout<<arr[i][j]
+      v.push_back(arr[i][j]);
+    }
+    vv.push_back(v);
+    v.clear();
+  }
+
+  return vv;
+}
