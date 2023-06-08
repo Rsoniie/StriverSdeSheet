@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+
+void rotate(vector<vector<int>> &mat, int rs, int cs, int re, int ce)
+{
+    if(rs >= re || cs >=ce)
+    {
+        return;
+    }
+    if(rs >= re-1 || cs >= ce-1)
+    {
+        return ;
+    }
+    int pr = mat[rs+1][cs];
+    int cr;
+
+    for(int i=cs;i<ce;i++)
+    {
+        cr = mat[rs][i];
+        mat[rs][i] = pr;
+        pr = cr;
+    }
+    rs++;
+
+    for(int i=rs;i<re;i++)
+    {
+        cr = mat[i][ce-1];
+        mat[i][ce-1] = pr;
+        pr = cr;
+    }
+    ce--;
+
+    for(int i=ce-1;i>=cs;i--)
+    {
+        cr = mat[re-1][i];
+        mat[re-1][i] = pr;
+        pr = cr;
+    }
+    re--;
+
+
+    for(int i=re-1;i>=rs;i--)
+    {
+        cr = mat[i][cs];
+        mat[i][cs] = pr;
+        pr = cr;
+    }
+    cs++;
+
+    rotate(mat, rs, cs, re, ce);
+}
+void rotateMatrix(vector<vector<int>> &mat, int n, int m)
+{
+   
+  rotate(mat, 0,0,n,m);
+}
