@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+string fourSum(vector<int> arr, int target, int n) {
+    sort(arr.begin(), arr.end());
+    for(int i=0;i<n-2;i++)
+    {
+        for(int j=i+1;j<n-1;j++)
+        {
+            int x = target - arr[i]- arr[j];
+
+            int k = j+1;
+            int l = n-1;
+            while(k<l)
+            {
+                int sum = arr[k]+arr[l];
+                if(sum == x)
+                {
+                    return "Yes";
+                }
+                else if(sum > x)
+                {
+                    l--;
+                }
+                else 
+                {
+                    k++;
+                }
+            }
+        }
+    }
+
+    return "No";
+}
