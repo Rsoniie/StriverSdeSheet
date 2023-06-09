@@ -1,0 +1,49 @@
+#include <bits/stdc++.h> 
+int uniqueSubstrings(string s)
+{
+    if(s.size() == 0)
+    {
+        return 0;
+    }
+    if(s.size() == 1)
+    {
+        return 1;
+    }
+    int n = s.size();
+    int maxi = 0;
+
+    int l=0;
+    int r=0;
+    bool vis[256] = {false};
+    // l = left r = right..
+    for(r=0;r<n;r++)
+    {
+        if(vis[s[r]] == false)
+        {
+            vis[s[r]] = right;
+        }
+        else 
+        {
+            maxi = max(maxi, r-l);
+
+
+            while(l<r)
+            {
+                if(s[l] != s[r])
+                {
+                     vis[s[l]] = false;
+                }
+                else 
+                {
+                    l++;
+                    break;
+                }
+                l++;
+            }
+        }
+    }
+    maxi = max(maxi, r-l);
+    return maxi;
+
+
+}
