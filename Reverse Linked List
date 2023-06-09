@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+
+    template <typename T>
+    class LinkedListNode
+    {
+    public:
+        T data;
+        LinkedListNode<T> *next;
+        LinkedListNode(T data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+*****************************************************************/
+void reverse(LinkedListNode<int> *&head, LinkedListNode<int> * curr, LinkedListNode<int> * pre)
+{
+    if(curr == NULL)
+    {
+        head = pre;
+        return ;
+    }
+
+    LinkedListNode<int> *nxt = curr -> next;
+    reverse(head , nxt, curr);
+    curr -> next = pre;
+}
+LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head) 
+{
+    LinkedListNode<int> *curr = head;
+    LinkedListNode<int> *pre = NULL;
+    reverse(head, curr, pre);
+
+    return head;
+}
