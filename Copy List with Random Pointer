@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+
+/*************************************************************
+
+    Following is the LinkedListNode class structure
+
+    template <typename T>   
+    class LinkedListNode
+    {
+        public:
+        T data;
+        LinkedListNode<T> *next;
+        LinkedListNode<T> *random;
+        LinkedListNode(T data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+*********************************************************/
+
+
+LinkedListNode<int> *cloneRandomListHelper(LinkedListNode<int> *head, unordered_map<LinkedListNode<int> *, LinkedListNode<int> *> &visitedHash)
+{
+	if (head == NULL)
+	{
+		return NULL;
+	}
+	if (visitedHash.find(head) != visitedHash.end())
+	{
+		return visitedHash[head];
+	}
+	LinkedListNode<int> *node = new LinkedListNode<int>(head->data);
+	visitedHash.insert(make_pair(head, node));
+
+	node->next = cloneRandomListHelper(head->next, visitedHash);
+	node->random = cloneRandomListHelper(head->random, visitedHash);
+
+	return node;
+}
+
+LinkedListNode<int> *cloneRandomList(LinkedListNode<int> *head)
+{
+
+
+	unordered_map<LinkedListNode<int> *, LinkedListNode<int> *> visitedHash;
+
+	return cloneRandomListHelper(head, visitedHash);
+}
