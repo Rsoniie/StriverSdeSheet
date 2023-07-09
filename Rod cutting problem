@@ -1,0 +1,35 @@
+# include<bits/stdc++.h>
+int f(vector<int> &val, int w, int i, vector<vector<int>> &dp)
+{
+	if(i==0)
+	{
+		if(1<=w)
+		{
+			return val[0]*w;
+		}
+		else 
+		{
+			return 0;
+		}
+		
+	}
+	if(dp[i][w] != -1)
+	{
+		return dp[i][w];
+	}
+	int ntake = 0+ f(val, w, i-1,dp);
+	int take = INT_MIN;
+	int rodle = i+1;
+	if(rodle<=w)
+	{
+		take = val[i]+f(val, w-rodle, i,dp);
+	}
+
+	return  dp[i][w] =  max(take, ntake);
+}
+int cutRod(vector<int> &price, int n)
+{
+   vector<vector<int>> dp(n, vector<int>(n+1, -1));
+	return f( price, n, n-1, dp);
+	
+}
