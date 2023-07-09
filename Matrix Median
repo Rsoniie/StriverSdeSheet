@@ -1,0 +1,28 @@
+# include<bits/stdc++.h>
+int getMedian(vector<vector<int>> &matrix)
+{
+    vector<int> v;
+    int n = matrix.size();
+    int m = matrix[0].size();
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            v.push_back(matrix[i][j]);
+        }
+    }
+
+    sort(v.begin(), v.end());
+
+    int s = v.size();
+    if(s%2!=0)
+    {
+        return v[s/2];
+    }
+    else {
+        int a = v[s/2];
+        int b = v[(s/2)-1];
+
+        return ((double)a+(double)b)/2;
+    }
+}
