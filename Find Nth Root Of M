@@ -1,0 +1,15 @@
+int NthRoot(int n, int m) {
+     if(n == 1)
+     {
+       return m;
+     }
+     int i=0;
+     while(pow(i, n)<=m)
+     {
+       if (pow(i, n) == m) {
+         return i;
+       }
+       i++;
+     }
+     return -1;
+}
