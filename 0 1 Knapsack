@@ -1,0 +1,31 @@
+int f(vector<int> &v, vector<int>&w, int i, int mw, vector<vector<int>>&dp)
+{
+	if(i == 0)
+	{
+		if(w[0]<= mw)
+		{
+			return v[0];
+		}
+			return 0;
+		
+	}
+     if(dp[i][mw] != -1)
+	 {
+		 return dp[i][mw];
+	 }
+
+	int ntake = 0+f(v, w, i-1, mw, dp);
+	int take=0;
+	if(w[i] <= mw)
+	{
+		take = v[i]+f(v,w, i-1, mw-w[i], dp);
+	}
+
+	return  dp[i][mw] =   max(take, ntake);
+}
+int maxProfit(vector<int> &values, vector<int> &weights, int n, int w)
+
+{
+	vector<vector<int>> dp(n, vector<int>(w+1, -1));
+	return f(values, weights, n-1, w, dp);
+}
