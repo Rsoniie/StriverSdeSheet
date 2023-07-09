@@ -1,0 +1,38 @@
+#include <bits/stdc++.h> 
+
+void f(vector<int>& A, vector<vector<int> >& res,
+                 vector<int>& subset, int index)
+{
+    res.push_back(subset);
+    for (int i = index; i < A.size(); i++) {
+
+        subset.push_back(A[i]);
+ 
+        f(A, res, subset, i + 1);
+ 
+        subset.pop_back();
+    }
+ 
+    return;
+}
+
+vector<int> subsetSum(vector<int> &num)
+{
+    vector<vector<int>> vv;
+    vector<int> v;
+    f(num, vv, v, 0);
+    vector<int> ans;
+    for(auto i:vv)
+    {
+        int sum=0;
+        for(auto j:i)
+        {
+            sum+=j;
+        }
+        ans.push_back(sum);
+    }
+   sort(ans.begin(),ans.end());
+    return ans;
+     
+
+}
