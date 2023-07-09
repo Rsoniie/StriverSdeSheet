@@ -1,0 +1,51 @@
+#include <bits/stdc++.h> 
+/*void f(vector<int>&arr, vector<vector<int>>&vv, vector<int>&v, int idx)
+{
+    
+    vv.push_back(v);
+    for(int i=idx;i<arr.size();i++)
+    {
+        v.push_back(arr[i]);
+
+        f(arr, vv, v, idx+1);
+
+        v.pop_back();
+    }
+
+    return ;
+}*/
+
+void f(vector<int>& A, vector<vector<int> >& res,
+                 vector<int>& subset, int index)
+{
+    res.push_back(subset);
+    for (int i = index; i < A.size(); i++) {
+
+        subset.push_back(A[i]);
+ 
+        f(A, res, subset, i + 1);
+ 
+        subset.pop_back();
+    }
+ 
+    return;
+}
+vector<vector<int>> uniqueSubsets(int n, vector<int> &arr)
+{
+    vector<vector<int>> vv;
+    vector<int> v;
+    f(arr, vv, v, 0);
+    set<vector<int>> st;
+    for(auto i:vv)
+    {
+        sort(i.begin(), i.end());
+        st.insert(i);
+    }
+    vv.clear();
+    for(auto i:st)
+    {
+        vv.push_back(i);
+    }
+   // sort(vv.begin(), vv.end());
+    return vv;
+}
