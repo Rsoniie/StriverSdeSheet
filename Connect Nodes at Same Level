@@ -1,0 +1,33 @@
+
+#include <queue>
+
+void connectNodes(BinaryTreeNode<int> *root) {
+
+    queue< BinaryTreeNode<int>* > que;
+    que.push(root);
+
+   
+    int nodesCount = 1;
+
+    while(!que.empty()) {
+        BinaryTreeNode<int> *previous = NULL;
+
+        while(nodesCount > 0) {
+            if(previous != NULL) {
+                previous->next = que.front();
+            }
+            previous = que.front();
+
+            if(que.front()->left != NULL) {
+                que.push(que.front()->left);
+            } 
+            if(que.front()->right != NULL) {
+                que.push(que.front()->right);
+            }
+            que.pop();
+            nodesCount--;
+        }
+
+        nodesCount = que.size();
+    }
+}
