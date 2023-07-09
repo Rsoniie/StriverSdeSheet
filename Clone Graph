@@ -1,0 +1,49 @@
+
+
+#include <unordered_map>
+
+graphNode *cloneGraphHelper(graphNode *node, unordered_map<graphNode *, graphNode *> &copies)
+{
+	if (node == NULL)
+	{
+		return NULL;
+	}
+
+
+	graphNode *copy = new graphNode(node->data);
+
+	copies[node] = copy;
+
+
+	queue<graphNode *> level;
+
+	level.push(node);
+
+	while (!level.empty())
+	{
+		graphNode *cur = level.front();
+		level.pop();
+
+		for (graphNode *neighbor : cur->neighbours)
+		{
+			if (copies.find(neighbor) == copies.end())
+			{
+				copies[neighbor] = new graphNode(neighbor->data, {});
+				level.push(neighbor);
+			}
+
+			copies[cur]->neighbours.push_back(copies[neighbor]);
+		}
+	}
+
+	return copy;
+}
+
+graphNode *cloneGraph(graphNode *node)
+{
+	
+	unordered_map<graphNode *, graphNode *> copies;
+
+
+	return cloneGraphHelper(node, copies);
+}
