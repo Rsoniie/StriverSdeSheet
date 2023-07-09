@@ -1,0 +1,48 @@
+#include <bits/stdc++.h> 
+vector<vector<int>> findTriplets(vector<int>arr, int n, int K) {
+	sort(arr.begin(), arr.end());
+	vector<int> v;
+	vector<vector<int>> vv;
+	for(int i=0;i<n-1;i++)
+	{
+		int x = K-arr[i];
+		int j  = i+1;
+		int k = n-1;
+		while(j<k)
+		{
+			int sum = arr[j]+arr[k];
+			if(sum == x)
+			{
+				v.push_back(arr[i]);
+				v.push_back(arr[j]);
+				v.push_back(arr[k]);
+				//sort(v.begin(), v.end());
+				vv.push_back(v);
+				v.clear();
+				j++;
+			}
+
+			else if(sum > x)
+			{
+				k--;
+			}
+			else 
+			{
+				j++;
+			}
+		}
+	}
+    set<vector<int>> st;
+	for(auto i:vv)
+	{
+		st.insert(i);
+	}
+
+	vv.clear();
+	for(auto i:st)
+	{
+		vv.push_back(i);
+	}
+
+	return vv;
+}
