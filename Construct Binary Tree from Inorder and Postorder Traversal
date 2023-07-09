@@ -1,0 +1,56 @@
+# include<bits/stdc++.h>
+/************************************************************
+   
+   Following is the TreeNode class structure
+   
+   class TreeNode<T>
+   { 
+   public:
+        T data; 
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+   
+        TreeNode(T data) 
+  		{ 
+            this -> data = data; 
+            left = NULL; 
+            right = NULL; 
+        }
+   };
+   
+   
+ ************************************************************/
+TreeNode<int> *build(vector<int> &in, int is, int ie, vector<int>&po, int ps, int pe, unordered_map<int, int> &mi)
+{
+     if(ps > pe || is > ie)
+     {
+          return NULL;
+     }
+
+     TreeNode<int>* root = new TreeNode<int> (po[pe]);
+
+     int inroot = mi[po[pe]];
+     int numsleft = inroot - is;
+
+     root -> left = build(in , is, inroot -1, po, ps,ps+numsleft-1, mi);
+
+     root -> right = build(in, inroot+1, ie, po, ps+numsleft, pe-1, mi);
+
+     return root;
+}
+TreeNode<int>* getTreeFromPostorderAndInorder(vector<int>& postOrder, vector<int>& inOrder) 
+{
+	unordered_map<int, int> mi;
+     if(inOrder.size() != postOrder.size())
+     {
+          return NULL;
+     }
+     for(int i=0;i<inOrder.size();i++)
+     {
+          mi[inOrder[i]] = i;
+     }
+
+     TreeNode<int>* ans = build(inOrder, 0, inOrder.size()-1, postOrder, 0, postOrder.size()-1, mi);
+
+     return ans;
+}
