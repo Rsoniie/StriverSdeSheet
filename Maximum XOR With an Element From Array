@@ -1,0 +1,55 @@
+
+
+#include <algorithm>
+
+vector<int> maxXorQueries(vector<int> &arr, vector<vector<int>> &queries)
+{
+
+    int m = queries.size();
+
+    vector<int> result(m, -1);
+
+    sort(arr.begin(), arr.end());
+    for(int i = 0; i < m; i++)
+    {
+
+        if(queries[i][1] < arr[0])
+        {
+            continue;
+        }
+
+        int left = 0;
+        int right = upper_bound(arr.begin(), arr.end(), queries[i][1]) - arr.begin();
+        int ans = 0;
+        int cur = 0;
+
+        for(int j = 30; j >= 0; j--)
+        {
+            if(queries[i][0] & (1 << j))
+            {
+                if(!(arr[left] & (1 << j)))
+                {
+                    ans = ans | (1 << j);
+                    right = lower_bound(arr.begin() + left, arr.begin() + right, cur + (1 << j)) - arr.begin();
+                }
+                else
+                {
+                    cur = cur | (1 << j);
+                }
+            } 
+            else
+            {
+           
+                if(arr[right-1] & (1 << j))
+                {
+                    ans = ans | (1 << j);
+                    cur = cur | (1 << j);
+                    left = lower_bound(arr.begin() + left, arr.begin() + right, cur) - arr.begin();
+                }
+            }
+        }
+        result[i] = ans;
+    }
+
+    return result;
+}
