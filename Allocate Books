@@ -1,0 +1,57 @@
+#include <bits/stdc++.h> 
+bool ispos(vector<int>arr,int m, int n, long long  mid )
+{
+	long long  cnt = 1;
+	long long  pa = 0;
+	for(int i=0;i<m;i++)
+	{
+		if(pa+arr[i] <= mid)
+		{
+			pa += arr[i];
+		}
+		else 
+		{
+			cnt++;
+			if(cnt > n || arr[i] > mid)
+			{
+				return false;
+			}
+			pa = arr[i];
+		}
+	}
+	return true;
+}
+long long ayushGivesNinjatest(int n, int m, vector<int> arr) 
+{	
+	// m chapters in n days..
+	// n == boundaries..
+	if(n > m)
+	{
+		return -1;
+	}
+	long long  s=0;
+	long long  sum=0;
+	for(int i=0;i<m;i++)
+	{
+		sum+=arr[i];
+	}
+	long long  e = sum;
+	long long  ans = -1;
+	long long  mid = (s+e)/2;
+	while(s<=e)
+	{
+		if(ispos(arr, m, n, mid))
+		{
+			ans = mid;
+			e = mid-1;
+		}
+		else 
+		{
+			s = mid+1;
+		}
+		mid = (s+e)/2;
+	}
+
+	return ans;
+	
+}
