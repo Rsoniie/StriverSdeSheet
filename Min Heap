@@ -1,0 +1,47 @@
+#include <bits/stdc++.h> 
+void heapify(vector<int> &arr, int n, int i)
+{
+    int sm = i;
+    int lc= 2*i+1;
+    int rc = 2*i+2;
+    if(lc < n && arr[sm] > arr[lc])
+    {
+        sm = lc;
+    }
+    if(rc < n && arr[sm] > arr[rc])
+    {
+        sm = rc;
+    }
+    if(sm != i)
+    {
+        swap(arr[sm], arr[i]);
+        heapify(arr, n, sm);
+    }
+}
+vector<int> minHeap(int n, vector<vector<int>>& q) {
+    vector<int> ans;
+    vector<int> v;
+    for(int i=0;i<n;i++)
+    {
+        int a = q[i][0];
+        if(a == 0)
+        {
+            ans.push_back(q[i][1]);
+            int x = ans.size()/2;
+            for(int i=x-1;i>=0;i--)
+            {
+            heapify(ans, ans.size(), i);
+            }
+        }
+        else 
+        {
+            v.push_back(ans[0]);
+            swap(ans[0], ans[ans.size()-1]);
+            ans.pop_back();
+        }
+    }
+
+    return v;
+
+    
+}
