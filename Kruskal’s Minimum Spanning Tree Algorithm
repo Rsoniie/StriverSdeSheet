@@ -1,0 +1,41 @@
+
+#include <algorithm>
+
+bool compare(vector<int> const &a, vector<int> const &b) {
+	return a[2] < b[2];
+}
+
+int kruskalMST(int n, int m, vector<vector<int>> &graph) {
+
+	vector<int> tree_id(n);
+	for (int i = 1; i <= n; i++) {
+	
+		tree_id[i] = i;
+	}
+
+	int cost = 0;
+
+	sort(graph.begin(), graph.end(), compare);
+
+	for (auto edge : graph) {
+		int u = edge[0];
+		int v = edge[1];
+		int w = edge[2];
+
+		if (tree_id[u] != tree_id[v]) {
+
+			cost += w;
+
+			int new_id = tree_id[v];
+			int old_id = tree_id[u];
+	
+			for (int i = 1; i <= n; i++) {
+				if (tree_id[i] == old_id) {
+		
+					tree_id[i] = new_id;
+				}
+			}
+		}
+	}
+	return cost;
+}
