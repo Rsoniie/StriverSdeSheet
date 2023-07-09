@@ -1,0 +1,97 @@
+/**
+ * Definition of linked list:
+ *
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *next;
+ *      Node() {
+ *          this->data = 0;
+ *          this->next = NULL;
+ *      }
+ *      Node(int data) {
+ *          this->data = data;
+ *          this->next = NULL;
+ *      }
+ *      Node (int data, Node *next) {
+ *          this->data = data;
+ *          this->next = next;
+ *      }
+ * };
+ *
+ *************************************************************************/
+/*void reverse(Node* &head, Node* curr, Node* pre)
+{
+    if(curr == NULL)
+    {
+        head  = pre;
+        return ;
+    }
+
+    Node* nxt = curr -> next;
+    reverse(head, nxt, curr);
+    curr -> next = pre;
+}*/
+Node *addTwoNumbers(Node *num1, Node *num2)
+{
+   /* Node* curr1 = num1;
+    Node* curr2 = num2;
+    Node* pre = NULL;
+    reverse(num1, curr1, pre);
+    reverse(num2, curr2, pre);*/
+
+    Node * head = new Node(-1);
+    Node* temp = head;
+
+    Node* temp1 = num1;
+    Node * temp2 = num2;
+    int r=0;
+    int hand =0 ;
+    while(temp1 != NULL && temp2 != NULL)
+    {
+         int d = temp1 -> data + temp2 -> data+hand;
+         hand = d/10;
+         r = d%10;
+         Node * temp10= new Node(r);
+         temp->next = temp10;
+         temp = temp->next;
+         temp1 = temp1 -> next;
+         temp2 = temp2 -> next;
+    }
+   // return head;
+    while(temp1 != NULL)
+    {
+        int d = temp1 -> data +hand;
+         hand = d/10;
+         r = d%10;
+         Node* temp10 = new Node(r);
+         temp -> next = temp10;
+         temp = temp -> next;
+         temp1 = temp1 -> next;
+    }
+       while(temp2 != NULL)
+    {
+        int d = temp2 -> data +hand;
+         hand = d/10;
+         r = d%10;
+         Node* temp10 = new Node(r);
+         temp -> next = temp10;
+         temp = temp -> next;
+         temp2 = temp2->next;
+    }
+     if(hand != 0)
+     {
+         Node* temp10  = new Node(hand);
+         temp -> next = temp10;
+        // temp = temp -> next;
+     }
+    // return head;
+    // Node* ans = head -> next;
+     Node* curr = head;
+    // reverse(head, curr, pre);
+    // return head;
+    //return num2;
+
+    return head->next;
+
+}
