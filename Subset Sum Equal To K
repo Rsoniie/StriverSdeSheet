@@ -1,0 +1,32 @@
+#include <bits/stdc++.h> 
+bool f(vector<int> &v, int i, int k, vector<vector<int>> &dp)
+{
+    if(k==0)
+    {
+        return true;
+    }
+    if(i == 0)
+    {
+        return (v[0]==k);
+    }
+    if(dp[i][k] != -1)
+    {
+        return dp[i][k];
+    }
+
+    bool ntake = f(v, i-1, k, dp);
+    bool take = false ;
+    if(k>=v[i])
+    {
+        take = f(v, i-1, k-v[i], dp);
+    }
+
+    return  dp[i][k] = (ntake || take);
+}
+
+bool subsetSumToK(int n, int k, vector<int> &arr) {
+    vector<vector<int>> dp(n, vector<int> (k+1, -1));
+
+    return f(arr, n-1, k, dp);
+    
+}
